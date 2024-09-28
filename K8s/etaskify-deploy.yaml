@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: your-app-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: your-app
+  template:
+    metadata:
+      labels:
+        app: your-app
+    spec:
+      containers:
+        - name: your-app
+          image: srthealikk/etaskify:1.0.3
+          ports:
+            - containerPort: 8080 # Varsayılan olarak uygulamanızın dinlediği port
+          env:
+            - name: DB_URL
+              value: jdbc:postgresql://postgresql:5432/postgres
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: '123456'
